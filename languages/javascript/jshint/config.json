@@ -1,0 +1,9 @@
+{
+    "imageName" : "bleach/jshint",
+    "requiredFiles" : [
+        {
+            "type" : "JSHint Config",
+            "file" : ".jshintrc"
+        }
+    ]
+}

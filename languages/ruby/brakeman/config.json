@@ -1,0 +1,13 @@
+{
+    "imageName" : "bleach/brakeman",
+    "requiredFiles" : [
+        {
+            "type" : "Brakeman Config",
+            "file" : "brakeman.yml"
+        },
+        {
+            "type" : "Gemfile",
+            "file" : "Gemfile.lock"
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Discover lib files to be included
+Dir.glob("#{__dir__}/../../../lib/**/*.rb").each do |lib_file|
+  require File.expand_path(lib_file, __dir__)
+end
+
+require 'optparse'
+require 'json'
+require 'isna'
+
+def print_brakeman_results(file, target, color)
+  data = File.read(file)
+  hash = JSON.parse(data)
+  hash[target].each do |warning|
+    puts ''
+    puts ''
+    warning.each do |key, value|
+      if value.is_a?(Hash)
+        puts "#{key.rjust(20, ' ').to_ansi.send(color).to_s}: #{value.inspect}"
+        next
+      end
+      if value.is_a?(Array)
+        puts "#{key.rjust(20, ' ').to_ansi.send(color).to_s}: #{value.inspect}"
+        next
+      end
+      puts "#{key.rjust(20, ' ').to_ansi.send(color).to_s}: #{value}"
+    end
+  end
+  return hash[target].empty?
+end
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename(__FILE__)} [OPTIONS]"
+
+  opts.on('-f', '--file [STRING]', 'File.') do |value|
+    options[:file] = value
+  end
+end.parse!
+
+required_options = [:file]
+required_options.each do |option|
+  unless options[option]
+    warn "Can not run #{option} was not given."
+    exit 1
+  end
+end
+
+file = File.basename(options[:file])
+dir = File.dirname(options[:file])
+
+config_file = "#{dir}/config.json"
+config = JSON.parse(File.read(config_file))
+
+image_name = config['imageName']
+tool_config = config['requiredFiles'].find do |record|
+  record['type'] == 'Brakeman Config'
+end['file']
+
+check_command = CodeCheck::Brakeman.new(
+  pwd: dir,
+  image_name: image_name,
+  config_file: tool_config,
+  source_files: "#{file}"
+)
+check_command.system
+
+exit 1 unless print_brakeman_results("#{dir}/report.json", 'errors', :red)
+if print_brakeman_results("#{dir}/report.json", 'warnings', :yellow)
+  puts 'No warnings or errors found.'
+end

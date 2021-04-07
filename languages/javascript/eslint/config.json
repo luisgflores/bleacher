@@ -1,0 +1,9 @@
+{
+    "imageName" : "bleach/eslint",
+    "requiredFiles" : [
+        {
+            "type" : "ESLint Config",
+            "file" : ".eslintrc.json"
+        }
+    ]
+}

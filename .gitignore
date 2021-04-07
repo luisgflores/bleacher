@@ -1,0 +1,5 @@
+.eslintrc.json
+.jshintrc
+.rubocop.yml
+.ruby-version
+brakeman.yml

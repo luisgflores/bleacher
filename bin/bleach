@@ -1,0 +1,133 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Discover lib files to be included
+Dir.glob("#{__dir__}/../lib/**/*.rb").each do |lib_file|
+  require File.expand_path(lib_file, __dir__)
+end
+
+require 'linguist'
+require 'optparse'
+require 'tmpdir'
+require 'json'
+require 'fileutils'
+require 'isna'
+
+# OPTIONS BLOCK
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{$0} [OPTIONS]"
+  f_description = 'Filepath of the file that needs to be checked.'
+  opts.on('-f', '--file [STRING]', f_description) do |value|
+    options[:file] = value
+  end
+  i_description = 'Install Git commit hook'
+  opts.on('-i', '--install', i_description) do |value|
+    options[:install] = value
+  end
+end.parse!
+
+if options[:install]
+  if system('install-bleach-git-hooks')
+    exit 0
+  else
+    warn 'Git hook installation failed.'
+    exit 1
+  end
+end
+
+required_options = [:file]
+required_options.each do |option|
+  unless options[option]
+    warn "Cannot run, '--#{option}' was not given."
+    exit 1
+  end
+end
+unless File.exist?(options[:file])
+  warn "File to check not found: '#{options[:file]}'"
+  exit 1
+end
+
+# LANGUAGE BLOCK
+file_language = Linguist::FileBlob.new(options[:file]).language.to_s
+
+LANGUAGE_MAP = {
+  'Ruby' => 'ruby',
+  'JavaScript' => 'javascript'
+}.freeze
+
+if LANGUAGE_MAP.keys.include?(file_language)
+  tool_dir = "#{__dir__ }/../lib/command/code_check/#{file_language.downcase}"
+  unless File.directory?(tool_dir)
+    warn "No tools found for language: '#{file_language}'"
+    exit 0
+  end
+  puts "Found supported language: #{file_language}"
+else
+  warn "Language not supported: #{file_language}"
+  exit 0
+end
+
+# PRINT BANNER FUNCTION
+def print_banner(tool, file)
+  template = '# [%s]: Running checks with tool: %s'
+  bindings = []
+  bindings.push(Time.now)
+  bindings.push(tool.to_ansi.yellow.to_s)
+  banner = (template % bindings).to_ansi.cyan.to_s
+  ruler = ('# ' + ('-' * 78)).to_ansi.cyan.to_s
+  file_detail = ('# target: ' + file).to_ansi.cyan.to_s
+  puts ''
+  puts banner
+  puts file_detail
+  puts ruler
+end
+
+# MAIN CHECK LOOP
+Dir.glob("#{__dir__}/../languages/#{LANGUAGE_MAP[file_language]}/*").each do |tool_directory|
+  config_file = "#{tool_directory}/config.json"
+  config = JSON.parse(File.read(config_file))
+  tool = File.basename(tool_directory)
+
+  print_banner(tool, options[:file])
+
+  # Work is done on copies of the original files inside a temp dir
+  Dir.mktmpdir do |tmpdir|
+    config['requiredFiles'].each do |required_file|
+      unless File.exist?(required_file['file'])
+        warn "#{tool} checks need a '#{required_file['file']}' file present to run."
+        warn 'Check will be stopped.'
+        exit 1
+      end
+      FileUtils.cp(required_file['file'], tmpdir)
+    end
+
+    FileUtils.cp(options[:file], tmpdir)
+    FileUtils.cp(config_file, tmpdir)
+    file_copy = File.basename(options[:file])
+
+    # Verify if Docker image exists
+    inspect_command = DockerCommand::DockerImageInspect.new(tag: tool)
+    unless inspect_command.system
+      # Otherwise, build Docker image for tool
+      puts "Building container image for #{tool}."
+      build_command = DockerCommand::DockerBuild.new(
+        tag: tool,
+        dockerfile_dir: tool_directory
+      )
+      exit 1 unless build_command.system
+    end
+
+    tool_command = Command::CheckFile.new(
+      tool_directory: tool_directory,
+      tmpdir: tmpdir,
+      file_copy: file_copy
+    )
+
+    unless tool_command.system
+      warn 'Source file did not pass some checks.'
+      warn 'No more checks will be run.'
+      exit 1
+    end
+  end
+end

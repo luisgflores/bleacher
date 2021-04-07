@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    abstract_command (0.0.6)
+    charlock_holmes (0.7.7)
+    escape_utils (1.2.1)
+    github-linguist (7.13.0)
+      charlock_holmes (~> 0.7.7)
+      escape_utils (~> 1.2.0)
+      mini_mime (~> 1.0)
+      rugged (>= 0.25.1)
+    isna (0.0.4)
+    mini_mime (1.0.3)
+    rugged (1.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  abstract_command
+  github-linguist
+  isna
