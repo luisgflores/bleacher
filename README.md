@@ -39,4 +39,4 @@ Options:
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/405828.svg)](https://asciinema.org/a/405828)
+[![asciicast](https://asciinema.org/a/406305.svg)](https://asciinema.org/a/406305)
