@@ -4,10 +4,6 @@
         {
             "type" : "Rubocop Config",
             "file" : ".rubocop.yml"
-        },
-        {
-            "type" : "Ruby Version",
-            "file" : ".ruby-version"
         }
     ]
 }

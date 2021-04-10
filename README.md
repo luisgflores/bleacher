@@ -35,7 +35,6 @@ Options:
   - [Rubocop](https://rubocop.org/)
 - JavaScript
   -
-  - [JSHint](https://jshint.com/)
   - [ESLint](https://eslint.org/)
 
 ## Demo
