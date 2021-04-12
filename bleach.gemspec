@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = %q{bleach}
-  spec.version = '0.0.4'
+  spec.version = '0.0.5'
   spec.date = %q{2021-03-30}
   spec.summary = %q{bleach - code check tool}
 
@@ -39,7 +39,6 @@ Gem::Specification.new do |spec|
   spec.authors.push('Kazuyoshi Tlacaelel')
   spec.homepage = 'https://github.com/freshout-dev/bleach'
   spec.add_runtime_dependency 'abstract_command', '~> 0.0.6'
-  spec.add_runtime_dependency 'github-linguist', '~> 7.13'
   spec.add_runtime_dependency 'isna', '~> 0.0.4'
   spec.license = 'MIT'
 end

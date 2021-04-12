@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
-# Discover lib files to be included
-Dir.glob("#{__dir__}/../lib/**/*.rb").each do |lib_file|
-  require File.expand_path(lib_file, __dir__)
-end
-
-require 'linguist'
+require 'abstract_command'
 require 'optparse'
 require 'tmpdir'
 require 'json'
 require 'fileutils'
 require 'isna'
+
+
+# Discover lib files to be included
+Dir.glob("#{__dir__}/../lib/**/*.rb").each do |lib_file|
+  require File.expand_path(lib_file, __dir__)
+end
 
 # OPTIONS BLOCK
 options = {}
@@ -48,8 +48,24 @@ unless File.exist?(options[:file])
   exit 1
 end
 
+# TODO: pluck these into a future config.
+def resolve_language(filepath)
+  basename = File.basename(filepath)
+  extension = File.extname(basename)
+  return 'Ruby' if basename == 'Gemfile'
+  return 'Ruby' if basename == 'Capfile'
+  return 'Ruby' if basename == 'Onafile'
+  return 'Ruby' if basename == 'Rakefile'
+  return 'Ruby' if basename == 'Thorfile'
+  return 'Ruby' if extension == '.rb'
+  return 'Ruby' if extension == '.gemspec'
+  return 'Ruby' if extension == '.ru'
+  return 'JavaScript' if extension == '.js'
+  return basename.inspect
+end
+
 # LANGUAGE BLOCK
-file_language = Linguist::FileBlob.new(options[:file]).language.to_s
+file_language = resolve_language(options[:file])
 
 LANGUAGE_MAP = {
   'Ruby' => 'ruby',
