@@ -1,0 +1,10 @@
+{
+    "imageName" : "bleacher/pylint",
+    "requiredFiles" : [
+        {
+            "type" : "Pylint Config",
+            "file" : "pylintrc"
+        }
+    ]
+
+}

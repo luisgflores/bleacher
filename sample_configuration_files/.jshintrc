@@ -5,7 +5,7 @@
 
     // Environments
     "browser"       : true,     // Web Browser (window, document, etc)
-    "node"          : true,    // Node.js
+    "node"          : true,     // Node.js
 
     // "camelcase"     : true,     // true: Identifiers must be in camelCase
     "curly"         : true,     // true: Require {} for every new block or scope

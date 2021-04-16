@@ -8,7 +8,7 @@ Bleacher is a Ruby tool that uses Docker containers to run static code analysis 
 
 ## Installation
 
-- Install [Docker](https://www.docker.com/products/docker-desktop). (Also take a look at [How can I use Docker without sudo](https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo) if you're on Linux.)
+- Install [Docker](https://www.docker.com/products/docker-desktop). (Also take a look at [How can I use Docker without sudo](https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo) if you're using Linux.)
 - Install the bleacher gem from this repository.
 
 ```bash
@@ -36,3 +36,6 @@ Options:
   -
   - [JSHint](https://jshint.com/)
   - [ESLint](https://eslint.org/)
+- Ruby
+  -
+  - [Pylint](https://www.pylint.org/)

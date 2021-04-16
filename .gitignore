@@ -3,3 +3,8 @@ bleach*.gem.bak
 test/*
 samples/*
 .gitignore
+/.rubocop.yml
+/.jshintrc
+/.eslintrc.json
+/brakeman.yml
+/pylintrc

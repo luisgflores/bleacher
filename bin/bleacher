@@ -53,7 +53,8 @@ file_language = Linguist::FileBlob.new(options[:file]).language.to_s
 
 LANGUAGE_MAP = {
   'Ruby' => 'ruby',
-  'JavaScript' => 'javascript'
+  'JavaScript' => 'javascript',
+  'Python' => 'python'
 }.freeze
 
 if LANGUAGE_MAP.keys.include?(file_language)

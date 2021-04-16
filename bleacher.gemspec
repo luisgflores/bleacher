@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = %q{bleacher}
-  spec.version = '0.0.2'
+  spec.version = '0.0.3'
   spec.date = %q{2021-03-30}
   spec.summary = %q{bleacher - code check tool}
 
@@ -13,6 +13,9 @@ Gem::Specification.new do |spec|
     './languages/javascript/eslint/check-file',
     './languages/javascript/eslint/Dockerfile',
     './languages/javascript/eslint/config.json',
+    './languages/python/pylint/check-file',
+    './languages/python/pylint/Dockerfile',
+    './languages/python/pylint/config.json',
     './languages/ruby/brakeman/check-file',
     './languages/ruby/brakeman/Dockerfile',
     './languages/ruby/brakeman/config.json',
@@ -25,6 +28,7 @@ Gem::Specification.new do |spec|
     './lib/command/docker_image_inspect.rb',
     './lib/command/code_check/javascript/jshint.rb',
     './lib/command/code_check/javascript/eslint.rb',
+    './lib/command/code_check/python/pylint.rb',
     './lib/command/code_check/ruby/rubocop.rb',
     './lib/command/code_check/ruby/brakeman.rb',
     './lib/command/check_file.rb',
