@@ -1,0 +1,107 @@
+---
+# Uncomment to skip/enable checks
+# Will run all checks by default (except "Optional Checks" listed below)
+# If you want to run all checks including optional, uncomment the following line:
+# :run_all_checks: true
+#
+# :skip_checks:
+# - CheckExecute
+# - CheckMassAssignment
+# - CheckSQL
+# :enable_checks:
+# - CheckExecute
+# - CheckMassAssignment
+# - CheckSQL
+
+ 
+# Available Checks:
+# ------------------------------
+# CheckBasicAuth                Checks for the use of http_basic_authenticate_with
+# CheckBasicAuthTimingAttack    Check for timing attack in basic auth (CVE-2015-7576)
+# CheckCrossSiteScripting       Checks for unescaped output in views
+# CheckContentTag               Checks for XSS in calls to content_tag
+# CheckCookieSerialization      Check for use of Marshal for cookie serialization
+# CheckCreateWith               Checks for strong params bypass in CVE-2014-3514
+# CheckCSRFTokenForgeryCVE      Checks for versions with CSRF token forgery vulnerability (CVE-2020-8166)
+# CheckDefaultRoutes            Checks for default routes
+# CheckDeserialize              Checks for unsafe deserialization of objects
+# CheckDetailedExceptions       Checks for information disclosure displayed via detailed exceptions
+# CheckDigestDoS                Checks for digest authentication DoS vulnerability
+# CheckDynamicFinders           Check unsafe usage of find_by_*
+# CheckEscapeFunction           Checks for versions before 2.3.14 which have a vulnerable escape method
+# CheckEvaluation               Searches for evaluation of user input
+# CheckExecute                  Finds instances of possible command injection
+# CheckFileAccess               Finds possible file access using user input
+# CheckFileDisclosure           Checks for versions with file existence disclosure vulnerability
+# CheckFilterSkipping           Checks for versions 3.0-3.0.9 which had a vulnerability in filters
+# CheckForgerySetting           Verifies that protect_from_forgery is enabled in direct subclasses of ActionController::Base
+# CheckHeaderDoS                Checks for header DoS (CVE-2013-6414)
+# CheckI18nXSS                  Checks for i18n XSS (CVE-2013-4491)
+# CheckJRubyXML                 Checks for versions with JRuby XML parsing backend
+# CheckJSONEncoding             Checks for missing JSON encoding (CVE-2015-3226)
+# CheckJSONEntityEscape         Check if HTML escaping is disabled for JSON output
+# CheckJSONParsing              Checks for JSON parsing vulnerabilities CVE-2013-0333 and CVE-2013-0269
+# CheckLinkTo                   Checks for XSS in link_to in versions before 3.0
+# CheckLinkToHref               Checks to see if values used for hrefs are sanitized using a :url_safe_method to protect against javascript:/data: XSS
+# CheckMailTo                   Checks for mail_to XSS vulnerability in certain versions
+# CheckMassAssignment           Finds instances of mass assignment
+# CheckMimeTypeDoS              Checks for mime type denial of service (CVE-2016-0751)
+# CheckModelAttrAccessible      Reports models which have dangerous attributes defined via attr_accessible
+# CheckModelAttributes          Reports models which do not use attr_restricted and warns on models that use attr_protected
+# CheckModelSerialize           Report uses of serialize in versions vulnerable to CVE-2013-0277
+# CheckNestedAttributes         Checks for nested attributes vulnerability in Rails 2.3.9 and 3.0.0
+# CheckNestedAttributesBypass   Checks for nested attributes vulnerability (CVE-2015-7577)
+# CheckNumberToCurrency         Checks for number helpers XSS vulnerabilities in certain versions
+# CheckPageCachingCVE           Check for page caching vulnerability (CVE-2020-8159)
+# CheckPermitAttributes         Warn on potentially dangerous attributes allowed via permit
+# CheckQuoteTableName           Checks for quote_table_name vulnerability in versions before 2.3.14 and 3.0.10
+# CheckRedirect                 Looks for calls to redirect_to with user input as arguments
+# CheckRegexDoS                 Searches regexes including user input
+# CheckRender                   Finds calls to render that might allow file access or code execution
+# CheckRenderDoS                Warn about denial of service with render :text (CVE-2014-0082)
+# CheckRenderInline             Checks for cross-site scripting in render calls
+# CheckResponseSplitting        Report response splitting in Rails 2.3.0 - 2.3.13
+# CheckRouteDoS                 Checks for route DoS (CVE-2015-7581)
+# CheckSafeBufferManipulation   Check for Rails versions with SafeBuffer bug
+# CheckSanitizeMethods          Checks for versions with vulnerable sanitize and sanitize_css
+# CheckSelectTag                Looks for unsafe uses of select_tag() in some versions of Rails 3.x
+# CheckSelectVulnerability      Looks for unsafe uses of select() helper
+# CheckSend                     Check for unsafe use of Object#send
+# CheckSendFile                 Check for user input in uses of send_file
+# CheckSessionManipulation      Check for user input in session keys
+# CheckSessionSettings          Checks for session key length and http_only settings
+# CheckSimpleFormat             Checks for simple_format XSS vulnerability (CVE-2013-6416) in certain versions
+# CheckSingleQuotes             Check for versions which do not escape single quotes (CVE-2012-3464)
+# CheckSkipBeforeFilter         Warn when skipping CSRF or authentication checks by default
+# CheckSprocketsPathTraversal   Checks for CVE-2018-3760
+# CheckSQL                      Check for SQL injection
+# CheckSQLCVEs                  Checks for several SQL CVEs
+# CheckSSLVerify                Checks for OpenSSL::SSL::VERIFY_NONE
+# CheckStripTags                Report strip_tags vulnerabilities
+# CheckSymbolDoSCVE             Checks for versions with ActiveRecord symbol denial of service vulnerability
+# CheckTemplateInjection        Searches for evaluation of user input through template injection
+# CheckTranslateBug             Report XSS vulnerability in translate helper
+# CheckUnsafeReflection         Checks for unsafe reflection
+# CheckUnsafeReflectionMethods  Checks for unsafe reflection to access methods
+# CheckValidationRegex          Report uses of validates_format_of with improper anchors
+# CheckVerbConfusion            Check for uses of `request.get?` that might have unintentional behavior
+# CheckWithoutProtection        Check for mass assignment using without_protection
+# CheckXMLDoS                   Checks for XML denial of service (CVE-2015-3227)
+# CheckYAMLParsing              Checks for YAML parsing vulnerabilities (CVE-2013-0156)
+# CheckDivideByZero             Warns on potential division by zero
+# CheckForceSSL                 Check that force_ssl setting is enabled in production
+# CheckReverseTabnabbing        Checks for reverse tabnabbing cases on 'link_to' calls
+# CheckSecrets                  Checks for secrets stored in source code
+# CheckSymbolDoS                Checks for symbol denial of service
+# CheckUnscopedFind             Check for unscoped ActiveRecord queries
+# CheckWeakHash                 Checks for use of weak hashes like MD5
+
+# Optional Checks:
+# ------------------------------
+# CheckDivideByZero             Warns on potential division by zero
+# CheckForceSSL                 Check that force_ssl setting is enabled in production
+# CheckReverseTabnabbing        Checks for reverse tabnabbing cases on 'link_to' calls
+# CheckSecrets                  Checks for secrets stored in source code
+# CheckSymbolDoS                Checks for symbol denial of service
+# CheckUnscopedFind             Check for unscoped ActiveRecord queries
+# CheckWeakHash                 Checks for use of weak hashes like MD5

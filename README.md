@@ -1,26 +1,25 @@
-# Bleach
+# Bleacher
 
-Bleach is a Ruby tool that uses Docker containers to run static code analysis tools (such as linters) against a source code file. Bleach can also install a Git pre-commit hook so it runs automagically for modified files before they are committed.
+Bleacher is a Ruby tool that uses Docker containers to run static code analysis tools (such as linters) against a source code file. Bleacher can also install a Git pre-commit hook so it runs automagically for modified files before they are committed.
 * [Installation](#installation)
 * [Usage](#usage)
 * [Supported languages and tools](#tools)
-* [Demo](#demo)
 
 
 ## Installation
 
-- Install [Docker](https://www.docker.com/products/docker-desktop).
-- Install the bleach gem.
+- Install [Docker](https://www.docker.com/products/docker-desktop). (Also take a look at [How can I use Docker without sudo](https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo) if you're on Linux.)
+- Install the bleacher gem from this repository.
 
 ```bash
-gem install bleach
+gem install bleacher-0.0.x.gem
 ```
 
 ## Usage
 
 Usage:
 
-    bleach [OPTIONS]
+    bleacher [OPTIONS]
 
 Options:
 
@@ -35,8 +34,5 @@ Options:
   - [Rubocop](https://rubocop.org/)
 - JavaScript
   -
+  - [JSHint](https://jshint.com/)
   - [ESLint](https://eslint.org/)
-
-## Demo
-
-[![asciicast](https://asciinema.org/a/406305.svg)](https://asciinema.org/a/406305)

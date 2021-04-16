@@ -1,5 +1,5 @@
 {
-    "imageName" : "bleach/brakeman",
+    "imageName" : "bleacher/brakeman",
     "requiredFiles" : [
         {
             "type" : "Brakeman Config",

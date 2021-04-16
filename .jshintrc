@@ -1,0 +1,20 @@
+{
+    // See http://jshint.com/docs/ for more details
+
+    // "esversion"     : 5,         // {int} Specify the ECMAScript version to which the code must adhere.
+
+    // Environments
+    "browser"       : true,     // Web Browser (window, document, etc)
+    "node"          : true,    // Node.js
+
+    // "camelcase"     : true,     // true: Identifiers must be in camelCase
+    "curly"         : true,     // true: Require {} for every new block or scope
+    "multistr"      : true,     // true: Tolerate multi-line strings
+    "nocomma"       : true,     // true: Prohibit use of the comma operator
+    "nonbsp"        : true,     // true: Prohibit "non-breaking whitespace" characters.
+
+    // Custom Globals
+    "globals"       : {
+        
+    }        // additional predefined global variables
+}

@@ -1,15 +1,15 @@
 Gem::Specification.new do |spec|
-  spec.name = %q{bleach}
-  spec.version = '0.0.5'
+  spec.name = %q{bleacher}
+  spec.version = '0.0.2'
   spec.date = %q{2021-03-30}
-  spec.summary = %q{bleach - code check tool}
+  spec.summary = %q{bleacher - code check tool}
 
   spec.files = [
-    './bin/bleach',
-    './bin/install-bleach-git-hooks',
-    # './languages/javascript/jshint/check-file',
-    # './languages/javascript/jshint/Dockerfile',
-    # './languages/javascript/jshint/config.json',
+    './bin/bleacher',
+    './bin/install-bleacher-git-hooks',
+    './languages/javascript/jshint/check-file',
+    './languages/javascript/jshint/Dockerfile',
+    './languages/javascript/jshint/config.json',
     './languages/javascript/eslint/check-file',
     './languages/javascript/eslint/Dockerfile',
     './languages/javascript/eslint/config.json',
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     './lib/command/docker_remove_image.rb',
     './lib/command/docker_build.rb',
     './lib/command/docker_image_inspect.rb',
-    # './lib/command/code_check/javascript/jshint.rb',
+    './lib/command/code_check/javascript/jshint.rb',
     './lib/command/code_check/javascript/eslint.rb',
     './lib/command/code_check/ruby/rubocop.rb',
     './lib/command/code_check/ruby/brakeman.rb',
@@ -33,14 +33,16 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
   spec.bindir = 'bin'
-  spec.executables.push('bleach')
-  spec.executables.push('install-bleach-git-hooks')
+  spec.executables.push('bleacher')
+  spec.executables.push('install-bleacher-git-hooks')
   spec.authors.push('Luis Flores')
   spec.authors.push('Kazuyoshi Tlacaelel')
-  spec.homepage = 'https://github.com/freshout-dev/bleach'
+  spec.homepage = 'https://github.com/luisgflores/bleach'
   spec.add_runtime_dependency 'abstract_command', '~> 0.0.6'
+  spec.add_runtime_dependency 'github-linguist', '~> 7.13'
   spec.add_runtime_dependency 'isna', '~> 0.0.4'
   spec.license = 'MIT'
 end
+
 
 

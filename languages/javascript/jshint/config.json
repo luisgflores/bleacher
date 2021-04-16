@@ -1,5 +1,5 @@
 {
-    "imageName" : "bleach/jshint",
+    "imageName" : "bleacher/jshint",
     "requiredFiles" : [
         {
             "type" : "JSHint Config",

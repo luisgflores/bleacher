@@ -9,7 +9,7 @@ module DockerCommand
     def template
       'docker rmi ' \
         '--force ' \
-        'bleach/' + '%<tag>s'
+        '%<tag>s'
     end
   end
 end

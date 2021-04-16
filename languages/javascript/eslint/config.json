@@ -1,5 +1,5 @@
 {
-    "imageName" : "bleach/eslint",
+    "imageName" : "bleacher/eslint",
     "requiredFiles" : [
         {
             "type" : "ESLint Config",

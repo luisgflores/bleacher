@@ -10,7 +10,7 @@ module DockerCommand
       'docker build ' +
         # '--no-cache ' +
         '--quiet ' \
-        '--tag bleach/' + '%<tag>s ' \
+        '--tag %<tag>s ' \
         '%<dockerfile_dir>s >/dev/null'
     end
   end

@@ -7,20 +7,20 @@ if File.exist?("#{Dir.pwd}/.git") && File.directory?("#{Dir.pwd}/.git")
   # 'Found .git directory'
   if File.exist?("#{Dir.pwd}/.git/hooks/pre-commit")
     # 'Found pre-commit file'
-    if File.exist?("#{Dir.pwd}/.git/hooks/pre-commit.bleach-backup")
+    if File.exist?("#{Dir.pwd}/.git/hooks/pre-commit.bleacher-backup")
       warn 'Git pre-commit hook backup found in "/.git/hooks/pre-commit.bleach-backup".'
       warn 'Will stop installation.'
       exit 1
     else
       # 'No backup found. Making one.'
       FileUtils.cp("#{Dir.pwd}/.git/hooks/pre-commit",
-        "#{Dir.pwd}/.git/hooks/pre-commit.bleach-backup")
+        "#{Dir.pwd}/.git/hooks/pre-commit.bleacher-backup")
       # 'Copying file'
       FileUtils.cp("#{__dir__}/../script/pre-commit",
         "#{Dir.pwd}/.git/hooks/pre-commit")
       FileUtils.chmod(0755,"#{Dir.pwd}/.git/hooks/pre-commit")
       puts 'Successfuly installed Git pre-commit hook in "/.git/hooks/pre-commit".'
-      puts 'I made a backup of your previous one in "/.git/hooks/pre-commit.bleach-backup".'
+      puts 'I made a backup of your previous one in "/.git/hooks/pre-commit.bleacher-backup".'
     end
   else
     # 'No file found. Copying.'

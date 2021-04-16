@@ -8,7 +8,7 @@ module DockerCommand
   class DockerImageInspect < AbstractCommand
     def template
       'docker image inspect ' \
-        'bleach/' + '%<tag>s' + ' >/dev/null 2>&1'
+        '%<tag>s >/dev/null 2>&1'
       # We don't care about output, we just want to know if image exists
     end
   end

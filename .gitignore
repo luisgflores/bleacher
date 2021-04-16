@@ -1,5 +1,5 @@
-.eslintrc.json
-.jshintrc
-.rubocop.yml
-.ruby-version
-brakeman.yml
+.DS_Store
+bleach*.gem.bak
+test/*
+samples/*
+.gitignore

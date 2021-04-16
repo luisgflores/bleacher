@@ -10,14 +10,17 @@ module Command
       'git diff-index --name-only --diff-filter=ACMR HEAD'
     end
   end
-  # Template for 'bleach' command
-  class Bleach < AbstractCommand
+  # Template for 'bleacher' command
+  class Bleacher < AbstractCommand
     def template
-      'bleach -f %<filename>s'
+      'bleacher -f %<filename>s'
     end
   end
 end
 
 Command::GitDiffIndex.new.backtick.each_line.map do |file|
-  exit 1 unless Command::Bleach.new(filename: file.chomp).system
+  unless Command::Bleacher.new(filename: file.chomp).system
+    warn 'Aborting commit operation.'
+    exit 1
+  end
 end

@@ -1,0 +1,20 @@
+{
+    "parserOptions": {
+        "sourceType": "script",
+        "ecmaFeatures": {}
+    },
+    "rules": {                          
+        "camelcase": 1,
+        "curly": 2,
+        "eqeqeq": 1,
+        "no-irregular-whitespace": 2,
+        "no-trailing-spaces": 1,
+        "no-whitespace-before-property": 2
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+    }
+}

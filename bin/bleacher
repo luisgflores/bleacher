@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
-
-require 'abstract_command'
-require 'optparse'
-require 'tmpdir'
-require 'json'
-require 'fileutils'
-require 'isna'
-
+# frozen_string_literal: true
 
 # Discover lib files to be included
 Dir.glob("#{__dir__}/../lib/**/*.rb").each do |lib_file|
   require File.expand_path(lib_file, __dir__)
 end
+
+require 'linguist'
+require 'optparse'
+require 'tmpdir'
+require 'json'
+require 'fileutils'
+require 'isna'
 
 # OPTIONS BLOCK
 options = {}
@@ -28,7 +28,7 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:install]
-  if system('install-bleach-git-hooks')
+  if system('install-bleacher-git-hooks')
     exit 0
   else
     warn 'Git hook installation failed.'
@@ -48,24 +48,8 @@ unless File.exist?(options[:file])
   exit 1
 end
 
-# TODO: pluck these into a future config.
-def resolve_language(filepath)
-  basename = File.basename(filepath)
-  extension = File.extname(basename)
-  return 'Ruby' if basename == 'Gemfile'
-  return 'Ruby' if basename == 'Capfile'
-  return 'Ruby' if basename == 'Onafile'
-  return 'Ruby' if basename == 'Rakefile'
-  return 'Ruby' if basename == 'Thorfile'
-  return 'Ruby' if extension == '.rb'
-  return 'Ruby' if extension == '.gemspec'
-  return 'Ruby' if extension == '.ru'
-  return 'JavaScript' if extension == '.js'
-  return basename.inspect
-end
-
 # LANGUAGE BLOCK
-file_language = resolve_language(options[:file])
+file_language = Linguist::FileBlob.new(options[:file]).language.to_s
 
 LANGUAGE_MAP = {
   'Ruby' => 'ruby',
@@ -123,12 +107,13 @@ Dir.glob("#{__dir__}/../languages/#{LANGUAGE_MAP[file_language]}/*").each do |to
     file_copy = File.basename(options[:file])
 
     # Verify if Docker image exists
-    inspect_command = DockerCommand::DockerImageInspect.new(tag: tool)
+    image_name = config['imageName']
+    inspect_command = DockerCommand::DockerImageInspect.new(tag: image_name)
     unless inspect_command.system
       # Otherwise, build Docker image for tool
       puts "Building container image for #{tool}."
       build_command = DockerCommand::DockerBuild.new(
-        tag: tool,
+        tag: image_name,
         dockerfile_dir: tool_directory
       )
       exit 1 unless build_command.system
