@@ -1,0 +1,10 @@
+{
+    "imageName" : "bleacher/bandit",
+    "requiredFiles" : [
+        {
+            "type" : "Bandit Config",
+            "file" : "bandit.yml"
+        }
+    ]
+
+}

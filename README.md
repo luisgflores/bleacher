@@ -4,6 +4,7 @@ Bleacher is a Ruby tool that uses Docker containers to run static code analysis 
 * [Installation](#installation)
 * [Usage](#usage)
 * [Supported languages and tools](#tools)
+* [Sample configuration files](https://github.com/luisgflores/bleacher/tree/main/sample_configuration_files)
 
 
 ## Installation
@@ -28,14 +29,15 @@ Options:
 
 ## Tools
 
+- JavaScript
+  -
+  - [ESLint](https://eslint.org/)
+  - [JSHint](https://jshint.com/)
+- Python
+  -
+  - [Bandit](https://github.com/PyCQA/bandit)
+  - [Pylint](https://www.pylint.org/)
 - Ruby
   -
   - [Brakeman](https://brakemanscanner.org/)
   - [Rubocop](https://rubocop.org/)
-- JavaScript
-  -
-  - [JSHint](https://jshint.com/)
-  - [ESLint](https://eslint.org/)
-- Ruby
-  -
-  - [Pylint](https://www.pylint.org/)

@@ -8,3 +8,4 @@ samples/*
 /.eslintrc.json
 /brakeman.yml
 /pylintrc
+/bandit.yml
