@@ -1,0 +1,10 @@
+{
+    "imageName" : "bleacher/csslint",
+    "requiredFiles" : [
+        {
+            "type" : "CSS Lint Config",
+            "file" : ".csslintrc"
+        }
+    ]
+
+}

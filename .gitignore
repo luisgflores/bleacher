@@ -10,3 +10,4 @@ samples/*
 /pylintrc
 /bandit.yml
 /.stylelintrc.js
+/.csslintrc

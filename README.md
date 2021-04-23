@@ -40,6 +40,7 @@ Options:
 
 - CSS
   -
+  - [CSS Lint](http://csslint.net/)
   - [Stylelint](https://stylelint.io/)
 - JavaScript
   -
@@ -53,3 +54,6 @@ Options:
   -
   - [Brakeman](https://brakemanscanner.org/)
   - [Rubocop](https://rubocop.org/)
+- SCSS
+  -
+  - [Stylelint-SCSS](https://github.com/kristerkari/stylelint-scss)

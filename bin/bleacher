@@ -57,7 +57,7 @@ LANGUAGE_MAP = {
   'Python' => 'python',
   'HTML' => 'html',
   'CSS' => 'css',
-  'SCSS' => 'css'
+  'SCSS' => 'scss'
 }.freeze
 
 if LANGUAGE_MAP.keys.include?(file_language)
@@ -109,6 +109,7 @@ Dir.glob("#{__dir__}/../languages/#{LANGUAGE_MAP[file_language]}/*").each do |to
     FileUtils.cp(options[:file], tmpdir)
     FileUtils.cp(config_file, tmpdir)
     file_copy = File.basename(options[:file])
+    #DEBUG system("ls -la #{tmpdir}")
 
     # Verify if Docker image exists
     image_name = config['imageName']
