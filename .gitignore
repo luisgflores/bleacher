@@ -9,3 +9,4 @@ samples/*
 /brakeman.yml
 /pylintrc
 /bandit.yml
+/.stylelintrc.js

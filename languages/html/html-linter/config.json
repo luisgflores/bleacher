@@ -1,0 +1,10 @@
+{
+    "imageName" : "bleacher/html-linter",
+    "requiredFiles" : [
+        {
+            "type" : "HTML-Linter Config",
+            "file" : "html-linter.yml"
+        }
+    ]
+
+}

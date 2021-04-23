@@ -54,18 +54,21 @@ file_language = Linguist::FileBlob.new(options[:file]).language.to_s
 LANGUAGE_MAP = {
   'Ruby' => 'ruby',
   'JavaScript' => 'javascript',
-  'Python' => 'python'
+  'Python' => 'python',
+  'HTML' => 'html',
+  'CSS' => 'css',
+  'SCSS' => 'css'
 }.freeze
 
 if LANGUAGE_MAP.keys.include?(file_language)
-  tool_dir = "#{__dir__ }/../lib/command/code_check/#{file_language.downcase}"
+  tool_dir = "#{__dir__ }/../lib/command/code_check/#{LANGUAGE_MAP[file_language]}"
   unless File.directory?(tool_dir)
     warn "No tools found for language: '#{file_language}'"
     exit 0
   end
   puts "Found supported language: #{file_language}"
 else
-  warn "Language not supported: #{file_language}"
+  warn "Language not supported: #{file_language} (#{File.basename(options[:file]).inspect})"
   exit 0
 end
 

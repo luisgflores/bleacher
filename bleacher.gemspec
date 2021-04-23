@@ -1,12 +1,18 @@
 Gem::Specification.new do |spec|
   spec.name = %q{bleacher}
-  spec.version = '0.0.4'
+  spec.version = '0.0.5'
   spec.date = %q{2021-03-30}
   spec.summary = %q{bleacher - code check tool}
 
   spec.files = [
     './bin/bleacher',
     './bin/install-bleacher-git-hooks',
+    './languages/css/stylelint/check-file',
+    './languages/css/stylelint/Dockerfile',
+    './languages/css/stylelint/config.json',
+    './languages/html/html-linter/check-file',
+    './languages/html/html-linter/Dockerfile',
+    './languages/html/html-linter/config.json',
     './languages/javascript/jshint/check-file',
     './languages/javascript/jshint/Dockerfile',
     './languages/javascript/jshint/config.json',
@@ -25,10 +31,11 @@ Gem::Specification.new do |spec|
     './languages/ruby/rubocop/check-file',
     './languages/ruby/rubocop/Dockerfile',
     './languages/ruby/rubocop/config.json',
-    './lib/docker_command.rb',
     './lib/command/docker_remove_image.rb',
     './lib/command/docker_build.rb',
     './lib/command/docker_image_inspect.rb',
+    './lib/command/code_check/css/stylelint.rb',
+    './lib/command/code_check/html/html-linter.rb',
     './lib/command/code_check/javascript/jshint.rb',
     './lib/command/code_check/javascript/eslint.rb',
     './lib/command/code_check/python/pylint.rb',

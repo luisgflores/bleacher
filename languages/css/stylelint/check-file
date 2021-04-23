@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Discover lib files to be included
+Dir.glob("#{__dir__}/../../../lib/**/*.rb").each do |lib_file|
+  require File.expand_path(lib_file, __dir__)
+end
+
+require 'optparse'
+require 'json'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename(__FILE__)} [OPTIONS]"
+
+  opts.on('-f', '--file [STRING]', 'File.') do |value|
+    options[:file] = value
+  end
+end.parse!
+
+required_options = [:file]
+required_options.each do |option|
+  unless options[option]
+    warn "Can not run #{option} was not given."
+    exit 1
+  end
+end
+
+file = File.basename(options[:file])
+dir = File.dirname(options[:file])
+
+config_file = "#{dir}/config.json"
+config = JSON.parse(File.read(config_file))
+
+image_name = config['imageName']
+tool_config = config['requiredFiles'].find do |record|
+  record['type'] == 'Stylelint Config'
+end['file']
+
+check_command = CodeCheck::Stylelint.new(
+  pwd: dir,
+  image_name: image_name,
+  config_file: tool_config,
+  source_files: "/code/#{file}"
+)
+exit 1 unless check_command.system

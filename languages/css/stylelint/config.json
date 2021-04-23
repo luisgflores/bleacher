@@ -1,0 +1,10 @@
+{
+    "imageName" : "bleacher/stylelint",
+    "requiredFiles" : [
+        {
+            "type" : "Stylelint Config",
+            "file" : ".stylelintrc.js"
+        }
+    ]
+
+}
