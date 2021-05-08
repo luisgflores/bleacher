@@ -9,8 +9,7 @@ module CodeCheck
         '--rm ' \
         '--volume %<pwd>s:/code ' \
         '%<image_name>s ' \
-        'html-linter ' \
-        '--rcfile=/code/%<config_file>s ' \
+        'html_lint.py ' \
         '%<source_files>s'
     end
   end

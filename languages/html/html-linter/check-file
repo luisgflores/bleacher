@@ -33,14 +33,10 @@ config_file = "#{dir}/config.json"
 config = JSON.parse(File.read(config_file))
 
 image_name = config['imageName']
-tool_config = config['requiredFiles'].find do |record|
-  record['type'] == 'HTML-Linter Config'
-end['file']
 
 check_command = CodeCheck::HTMLLinter.new(
   pwd: dir,
   image_name: image_name,
-  config_file: tool_config,
   source_files: "/code/#{file}"
 )
 exit 1 unless check_command.system

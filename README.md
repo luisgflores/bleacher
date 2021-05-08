@@ -29,19 +29,23 @@ sudo apt-get install make build-essential libicu-dev cmake libssl-dev
 
 Usage:
 
-    bleacher [OPTIONS]
+    bleacher [OPTION]
 
-Options:
+Options (mutually exclusive):
 
     -f, --file [STRING]              Filepath of the file that needs to be checked.
-    -i, --install                    Install Git pre-commit hooks.
+    -i, --install                    Install Git pre-commit hook.
 
 ## Tools
+Source file language is autodetected at run time.
 
 - CSS
   -
   - [CSS Lint](http://csslint.net/)
   - [Stylelint](https://stylelint.io/)
+- HTML
+  -
+  - [HTML Linter](https://github.com/sk-/html-linter)
 - JavaScript
   -
   - [ESLint](https://eslint.org/)
