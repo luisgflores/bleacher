@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
   spec.name = %q{bleacher}
-  spec.version = '0.0.5'
-  spec.date = %q{2021-03-30}
+  spec.version = '0.0.6'
+  spec.date = %q{2021-11-26}
   spec.summary = %q{bleacher - code check tool}
 
   spec.files = [

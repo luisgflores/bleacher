@@ -12,6 +12,7 @@ require 'tmpdir'
 require 'json'
 require 'fileutils'
 require 'isna'
+require 'pathname'
 
 # OPTIONS BLOCK
 options = {}
@@ -52,12 +53,12 @@ end
 file_language = Linguist::FileBlob.new(options[:file]).language.to_s
 
 LANGUAGE_MAP = {
-  'Ruby' => 'ruby',
-  'JavaScript' => 'javascript',
-  'Python' => 'python',
-  'HTML' => 'html',
-  'CSS' => 'css',
-  'SCSS' => 'scss'
+  'CSS'         => 'css',
+  'HTML'        => 'html',
+  'JavaScript'  => 'javascript',
+  'Python'      => 'python',
+  'Ruby'        => 'ruby',
+  'SCSS'        => 'scss'
 }.freeze
 
 if LANGUAGE_MAP.keys.include?(file_language)
@@ -97,18 +98,45 @@ Dir.glob("#{__dir__}/../languages/#{LANGUAGE_MAP[file_language]}/*").each do |to
 
   # Work is done on copies of the original files inside a temp dir
   Dir.mktmpdir do |tmpdir|
-    config['requiredFiles'].each do |required_file|
-      unless File.exist?(required_file['file'])
-        warn "#{tool} checks need a '#{required_file['file']}' file present to run."
-        warn 'Check will be stopped.'
-        exit 1
-      end
-      FileUtils.cp(required_file['file'], tmpdir)
-    end
-
     FileUtils.cp(options[:file], tmpdir)
     FileUtils.cp(config_file, tmpdir)
     file_copy = File.basename(options[:file])
+
+    config['requiredFiles'].each do |required_file|
+      config_file_stack = []
+      # File on repository root
+      if File.exist?(required_file['file'])
+        config_file_stack.push(required_file['file'])
+      end
+
+      # Search for alternate files on path to file
+      # Get path to file to be checked
+      path_stack = Pathname(options[:file]).each_filename.to_a
+      # Get rid of filename (keep directories only)
+      path_stack.pop
+      unless path_stack.empty?
+        for step in 0..(path_stack.length - 1) do
+          new_path = ''
+          for i in 0..step do
+            new_path += path_stack[i] + '/'
+          end
+          file_with_path = new_path + required_file['file']
+          if File.exist?(file_with_path)
+            config_file_stack.push(file_with_path)
+          end
+        end
+      end
+
+      if config_file_stack.empty?
+        # No file found anywhere!
+        warn "#{tool} checks need a '#{required_file['file']}' file present to run."
+        warn 'Check will be stopped.'
+        exit 1
+      else
+        # Use config file closest to file to be checked
+        FileUtils.cp(config_file_stack.pop, tmpdir)
+      end
+    end
     #DEBUG system("ls -la #{tmpdir}")
 
     # Verify if Docker image exists
